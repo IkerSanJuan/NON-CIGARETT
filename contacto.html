@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoja de Contactos</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="icon" href="./img/SmartCypher.jpg">
+    <script src="JS/Contacto.js"></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js'></script>
+    <script type='text/javascript'>
+        (function(){
+            emailjs.init('<user_rApsFSg5zhiAwg2dpRuXU>');
+        })();
+    </script>
+    <script type="text/javascript">
+        window.onload = function() {
+            document.getElementById('contact-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                this.contact_number.value = Math.random() * 100000 | 0;
+                emailjs.sendForm('contact_service', 'contact_form', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+<nav>
+    <div class="logo">
+        <img src="img/logo2.png" alt="Logo">
+        <p class="logotext">
+            SmartCipher
+        </p>
+    </div>
+    <ul>
+        <li><a href="index.html">Principal</a></li>
+        <li><a href="Mapa.html">Mapa</a></li>
+        <li><a href="#">Logros</a></li>
+        <li><a href="calculadora.html">Calculadora de Gastos</a></li>
+        <li><a href="sesión.html">Iniciar Sesión/Registrarse</a></li>
+    </ul>
+</nav>
+<img src="img/Fondo.png" alt="Logo" width="100%" height="100%">
+
+<main>
+   
+    <div class="info">
+        <div class="titulo">Contacto con los Administradores</div>
+        <form id="contact-form" onsubmit="return validar(this)">
+            <input type="hidden" name="contact_number">
+            <label>Nombre</label>
+            <input type="text" name="user_name" onkeypress="return validarn(event)">
+            <label>Email</label>
+            <input type="email" name="user_email" >
+            <label>Mensaje</label>
+            <textarea name="message" ></textarea>
+            <button type="submit" value="Send" onclick="alerta()">Enviar</button>
+        </form>
+        <p id="salida"></p>
+    </div>
+    
+</main>
+</body>
+</html>
